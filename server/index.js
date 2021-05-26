@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser')
 const admin = require('./modules/admin/route');
+const course = require('./modules/course/route');
+const teacher = require('./modules/teacher/route');
 
 const https = require('https');
 const fs = require('fs');
@@ -28,6 +30,8 @@ mongoose.connect("mongodb+srv://sdp:sdp@123@sdp.wkhmx.mongodb.net/myFirstDatabas
 .then( () => console.log("connected to DB."))
 .catch( err => console.log(err));
 
-app.use('/admin', admin);
+app.use('/api/admin', admin);
+app.use('/api/course', course);
+app.use('/api/teacher', teacher);
 
 
