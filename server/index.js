@@ -9,10 +9,11 @@ const teacher = require('./modules/teacher/route');
 const https = require('https');
 const fs = require('fs');
 /*Middleware */
-//const auth = require('./middleware/auth');
+// const auth = require('./middleware/auth');
 const app = express();
 app.use(express.json());
 app.use(cors());
+
 app.use(bodyParser.json());
 //app.use(auth);
 

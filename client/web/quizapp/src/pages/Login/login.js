@@ -1,6 +1,42 @@
 import LoginFooter from "../../component/login/LoginFooter";
+import axios from "axios";
+import{ useState} from 'react';
 
-const Login = () => {
+
+
+const Login = (props) => {
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [user, setUser] = useState()
+    console.log(props)
+   
+    const onSubmit = (e)=>{
+         e.preventDefault();
+         const user ={email, password}
+       axios.post('http://localhost:5000/api/admin/login', user).then(response=>{
+              console.log(response.data.token)
+          // set the state of the user
+          localStorage.setItem('user', JSON.stringify({token:response.data.token,email:response.data.email}))
+          setUser(response.data)
+          // store the user in localStorage
+         
+          },(error)=>{
+              console.log(error)
+          })
+    }
+
+    if (user) {
+        // return <div>
+        //   {/* {user.email} <Dashboard {}/>
+        //  <button onClick={handleLogout}>logout</button>  */}
+        // </div>;
+
+        props.history.push("/dashboard");
+        
+      }
+
+
+      
   return (
     <div className="bg-primary">
       <div id="layoutAuthentication">
@@ -23,7 +59,9 @@ const Login = () => {
                             className="form-control py-4"
                             id="inputEmailAddress"
                             type="email"
+                            value={email}
                             placeholder="Enter email address"
+                            onChange={(e)=>setEmail(e.target.value)}
                           />
                         </div>
                         <div className="form-group">
@@ -34,7 +72,9 @@ const Login = () => {
                             className="form-control py-4"
                             id="inputPassword"
                             type="password"
+                            value={password}
                             placeholder="Enter password"
+                            onChange={(e)=>setPassword(e.target.value)}
                           />
                         </div>
                         <div className="form-group">
@@ -56,9 +96,9 @@ const Login = () => {
                           <a className="small" href="password.html">
                             Forgot Password?
                           </a>
-                          <a className="btn btn-primary" href="index.html">
+                          <button className="btn btn-primary" href="index.html" onClick={onSubmit}>
                             Login
-                          </a>
+                          </button>
                         </div>
                       </form>
                     </div>
