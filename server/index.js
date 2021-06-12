@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser')
 const admin = require('./modules/admin/route');
 const course = require('./modules/course/route');
+const quiz = require('./modules/quiz/route');
 const teacher = require('./modules/teacher/route');
 
 const https = require('https');
@@ -33,6 +34,7 @@ mongoose.connect("mongodb+srv://sdp:sdp@123@sdp.wkhmx.mongodb.net/myFirstDatabas
 
 app.use('/api/admin', admin);
 app.use('/api/course', course);
+app.use('/api/quiz', quiz);
 app.use('/api/teacher', teacher);
 
 

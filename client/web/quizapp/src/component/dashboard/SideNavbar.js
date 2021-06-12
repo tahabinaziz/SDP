@@ -3,53 +3,56 @@ import { React } from "react";
 const SideNavbar = () => {
   return (
     <div id="layoutSidenav_nav">
-      <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-        <div class="sb-sidenav-menu">
-          <div class="nav">
-            <div class="sb-sidenav-menu-heading">Core</div>
-            <a class="nav-link" href="#">
-              <div class="sb-nav-link-icon">
-                <i class="fas fa-tachometer-alt"></i>
+      <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div className="sb-sidenav-menu">
+          <div className="nav">
+            <div className="sb-sidenav-menu-heading">Core</div>
+            <a className="nav-link" href="#">
+              <div className="sb-nav-link-icon">
+                <i className="fas fa-tachometer-alt"></i>
               </div>
               <NavLink className="nav-link" exact to="/dashboard">Dashboard</NavLink>  
             </a>
-            <div class="sb-sidenav-menu-heading">Interface</div>
+            <div className="sb-sidenav-menu-heading">Interface</div>
             <a
-              class="nav-link collapsed"
+              className="nav-link collapsed"
               href="#"
               data-toggle="collapse"
               data-target="#collapseLayouts"
               aria-expanded="false"
               aria-controls="collapseLayouts"
             >
-              <div class="sb-nav-link-icon">
-                <i class="fas fa-columns"></i>
+              
+              
+              <div className="sb-nav-link-icon">
+                <i className="fas fa-columns"></i>
               </div>
+              
               <NavLink className="nav-link" exact to="/quiz"> Quiz</NavLink>
             
-              <div class="sb-sidenav-collapse-arrow">
-                <i class="fas fa-angle-down"></i>
+              <div className="sb-sidenav-collapse-arrow">
+                <i className="fas fa-angle-down"></i>
               </div>
             </a>
             <div
-              class="collapse"
+              className="collapse"
               id="collapseLayouts"
               aria-labelledby="headingOne"
               data-parent="#sidenavAccordion"
             >
-              <nav class="sb-sidenav-menu-nested nav">
-                <NavLink className="nav-link" exact to="/question">
-                  Question
+              <nav className="sb-sidenav-menu-nested nav">
+                <NavLink className="nav-link" exact to="/addQuiz">
+                  Add Quiz
                 </NavLink>
-                <NavLink className="nav-link" exact to="/result">
-                  Result
+                <NavLink className="nav-link" exact to="/viewQuiz">
+                  View Quiz
                 </NavLink>
               </nav>
             </div>
           </div>
         </div>
-        <div class="sb-sidenav-footer">
-          <div class="small">Logged in as:</div>
+        <div className="sb-sidenav-footer">
+          <div className="small">Logged in as:</div>
           user
         </div>
       </nav>

@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import {NavLink } from "react-router-dom";
 import { React } from "react";
 
 const Navbar = (props) => {
@@ -20,7 +20,7 @@ const Navbar = (props) => {
         {/* <!-- Navbar--> */}
 
 
-      <p className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" style={{color:"white"}}>{JSON.parse(localStorage.getItem("user")).email }</p> 
+      <p className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 text-white">{JSON.parse(localStorage.getItem("user")).email }</p> 
         
         <ul class="navbar-nav ml-auto ml-md-0">
           <li class="nav-item dropdown">

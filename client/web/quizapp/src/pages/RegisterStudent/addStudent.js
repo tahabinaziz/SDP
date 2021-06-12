@@ -4,31 +4,29 @@ import Footer from "../../component/dashboard/Footer";
 import Navbar from "../../component/dashboard/Navbar";
 import SideNavbar from "../../component/dashboard/SideNavbar";
 import QuizTable from "../../component/dashboard/QuizTable";
-
-const Quiz = (props)=>{
-    return(
-        <div>
-             <Navbar {...props}/>
+import Form from "../../component/form/Form";
+const AddStudent = (props) => {
+  return (
+    <div>
+      <Navbar {...props} />
       <div id="layoutSidenav">
         <SideNavbar />
         <div id="layoutSidenav_content">
           <main>
             <div class="container-fluid">
-              <h1 class="mt-4">Quiz</h1>
+              <h1 class="mt-4">Student Registration</h1>
               <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Quiz Tab</li>
+                <li class="breadcrumb-item active">Add Student</li>
               </ol>
               <Cards />
               <QuizTable />
-            
+              <Form/>
             </div>
           </main>
           <Footer />
         </div>
       </div>
     </div>
-        
-    )
-}
-
-export default Quiz;
+  );
+};
+export default AddStudent;

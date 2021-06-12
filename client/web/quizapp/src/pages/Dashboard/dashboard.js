@@ -3,7 +3,7 @@ import Cards from "../../component/dashboard/Cards";
 import Footer from "../../component/dashboard/Footer";
 import Navbar from "../../component/dashboard/Navbar";
 import SideNavbar from "../../component/dashboard/SideNavbar";
-import Table from "../../component/dashboard/Table";
+import QuizTable from "../../component/dashboard/QuizTable";
 
 const Dashboard = (props) => {
   console.log(props)
@@ -20,7 +20,7 @@ const Dashboard = (props) => {
                 <li class="breadcrumb-item active">Dashboard</li>
               </ol>
               <Cards />
-              <Table />
+              <QuizTable />
             </div>
           </main>
           <Footer />

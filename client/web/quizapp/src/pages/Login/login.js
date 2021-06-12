@@ -1,42 +1,40 @@
 import LoginFooter from "../../component/login/LoginFooter";
 import axios from "axios";
-import{ useState} from 'react';
-
-
+import { useState } from "react";
 
 const Login = (props) => {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [user, setUser] = useState()
-    console.log(props)
-   
-    const onSubmit = (e)=>{
-         e.preventDefault();
-         const user ={email, password}
-       axios.post('http://localhost:5000/api/admin/login', user).then(response=>{
-              console.log(response.data.token)
-          // set the state of the user
-          localStorage.setItem('user', JSON.stringify({token:response.data.token,email:response.data.email}))
-          setUser(response.data)
-          // store the user in localStorage
-         
-          },(error)=>{
-              console.log(error)
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [user, setUser] = useState();
+  console.log(props);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const user = { email, password };
+    axios.post("http://localhost:5000/api/admin/login", user).then(
+      (response) => {
+        console.log(response.data.token);
+        // set the state of the user
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            token: response.data.token,
+            email: response.data.email,
           })
-    }
-
-    if (user) {
-        // return <div>
-        //   {/* {user.email} <Dashboard {}/>
-        //  <button onClick={handleLogout}>logout</button>  */}
-        // </div>;
-
-        props.history.push("/dashboard");
-        
+        );
+        setUser(response.data);
+        // store the user in localStorage
+      },
+      (error) => {
+        console.log(error);
       }
+    );
+  };
 
+  if (user) {
+    props.history.push("/dashboard");
+  }
 
-      
   return (
     <div className="bg-primary">
       <div id="layoutAuthentication">
@@ -61,7 +59,7 @@ const Login = (props) => {
                             type="email"
                             value={email}
                             placeholder="Enter email address"
-                            onChange={(e)=>setEmail(e.target.value)}
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                         </div>
                         <div className="form-group">
@@ -74,7 +72,7 @@ const Login = (props) => {
                             type="password"
                             value={password}
                             placeholder="Enter password"
-                            onChange={(e)=>setPassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                           />
                         </div>
                         <div className="form-group">
@@ -96,7 +94,11 @@ const Login = (props) => {
                           <a className="small" href="password.html">
                             Forgot Password?
                           </a>
-                          <button className="btn btn-primary" href="index.html" onClick={onSubmit}>
+                          <button
+                            className="btn btn-primary"
+                            href="index.html"
+                            onClick={onSubmit}
+                          >
                             Login
                           </button>
                         </div>

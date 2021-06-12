@@ -3,6 +3,10 @@ export const AppRoutes = {
     Dashboard : "/dashboard",
     Quiz:"/quiz",
     Question: "/question",
-    Reuslt: "/result"
+    Reuslt: "/result",
+    AddStudent:"/addStudent",
+    ViewStudent:"/viewStudent",
+    AddQuiz:"/addQuiz",
+    ViewQuiz:"/viewQuiz"
   }
   
