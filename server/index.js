@@ -4,15 +4,17 @@ const cors = require('cors');
 const bodyParser = require('body-parser')
 const admin = require('./modules/admin/route');
 const course = require('./modules/course/route');
+const quiz = require('./modules/quiz/route');
 const teacher = require('./modules/teacher/route');
 
 const https = require('https');
 const fs = require('fs');
 /*Middleware */
-//const auth = require('./middleware/auth');
+// const auth = require('./middleware/auth');
 const app = express();
 app.use(express.json());
 app.use(cors());
+
 app.use(bodyParser.json());
 //app.use(auth);
 
@@ -32,6 +34,7 @@ mongoose.connect("mongodb+srv://sdp:sdp@123@sdp.wkhmx.mongodb.net/myFirstDatabas
 
 app.use('/api/admin', admin);
 app.use('/api/course', course);
+app.use('/api/quiz', quiz);
 app.use('/api/teacher', teacher);
 
 
