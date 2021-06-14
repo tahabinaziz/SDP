@@ -8,7 +8,9 @@ import AddStudent from "../../pages/RegisterStudent/addStudent";
 import ViewStudent from "../../pages/RegisterStudent/viewStudent";
 import Login from "../../pages/Login/login";
 import AddQuiz from "../../pages/Dashboard/Quiz/addQuiz";
-import ViewQuiz from "../../pages/Dashboard/Quiz//viewQuiz";
+import ViewQuiz from "../../pages/Dashboard/Quiz/viewQuiz";
+import AddQuestion from "../../pages/Dashboard/Question/addQuestion";
+import ViewQuestion from "../../pages/Dashboard/Question/viewQuestion";
 import { ProtectedRoute } from "../Router/ProtectedRoutes";
 import { AppRoutes } from "./routes";
 
@@ -32,6 +34,14 @@ const routing = [
   {
     appRoute: AppRoutes.Question,
     component: Question,
+  },
+  {
+    appRoute: AppRoutes.AddQuestion,
+    component: AddQuestion,
+  },
+  {
+    appRoute: AppRoutes.ViewQuestion,
+    component: ViewQuestion,
   },
   {
     appRoute: AppRoutes.Result,

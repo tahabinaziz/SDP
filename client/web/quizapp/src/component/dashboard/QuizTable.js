@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import Modal from "../dashboard/Modal";
-
+import moment from "moment";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 // import { getQuiz } from "../../api/quiz";
 
 const QuizTable = () => {
+  let history = useHistory();
   const [quiz, setQuiz] = useState([]);
   const [disp, setDisp] = useState(false);
   const [data, setData] = useState({});
+  //const [difference, setDifference] = useState();
+
   useEffect(() => {
     loadData();
   }, []);
@@ -15,9 +19,34 @@ const QuizTable = () => {
     console.log("hello");
     // let result = await getQuiz()
     const result = await axios.get(`http://localhost:5000/api/quiz/`);
-    setQuiz(result.data);
-    console.log(result);
+    setQuiz(result.data.data.quiz);
+    console.log(result.data.data.quiz);
   };
+
+
+  const { date, startTime, endTime, } = data;
+  const start = `${date} ${startTime}`;
+  const end = `${date} ${endTime}`;
+  const difference = moment
+    .utc(moment(end).diff(moment(start)))
+    .format("HH:mm:ss");
+
+  const onInputChange = (e) => {
+    setData({ ...data,duration: difference, [e.target.name]: e.target.value });
+  };
+
+  const loadQuiz=(value)=>{
+
+    setDisp(false)
+    if(value==true){
+      loadData()
+    }
+  }
+  const deleteRecord= async(id)=>{
+await axios.delete(`http://localhost:5000/api/quiz/${id}`);
+loadData();
+
+  }
   return (
     <div>
       <div className="card mb-4">
@@ -38,8 +67,8 @@ const QuizTable = () => {
                   <th>Title</th>
                   <th>Meeting Id</th>
                   <th>Password</th>
+                  <th>Date</th>
                   <th>Duration</th>
-                  <th>Due Date</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -51,14 +80,12 @@ const QuizTable = () => {
                       <td>{item.title}</td>
                       <td>{item.meetingId}</td>
                       <td>{item.password}</td>
-                      <td>{"2011/04/25"}</td>
-                      <td>{item.dueDate}</td>
+                      <td>{item.date}</td>
+                      <td>{item.duration}</td>
 
                       <td>
                         <ul className="list-inline m-0">
-                          <li className="list-inline-item">
-                           
-                          </li>
+                          <li className="list-inline-item"></li>
                           <li className="list-inline-item">
                             <button
                               className="btn btn-success btn-sm rounded-0"
@@ -81,6 +108,7 @@ const QuizTable = () => {
                               data-toggle="tooltip"
                               data-placement="top"
                               title="Delete"
+                              onClick={()=>{deleteRecord(item._id)}}
                             >
                               <i className="fa fa-trash"></i>
                             </button>
@@ -96,7 +124,7 @@ const QuizTable = () => {
         </div>
       </div>
       {data && disp && (
-        <Modal display={disp} onCloseModal={() => setDisp(false)} data={data}>
+        <Modal display={disp} onCloseModal={() => setDisp(false)} data={data} loadQuiz={loadQuiz}>
           <label for="Title">Title</label>
           <input
             type="text"
@@ -104,6 +132,7 @@ const QuizTable = () => {
             id="Title"
             name="title"
             value={data.title}
+            onChange={(e) => onInputChange(e)}
           />
           <label for="meetingId">Meeting Id</label>
           <input
@@ -111,6 +140,7 @@ const QuizTable = () => {
             class="form-control"
             id="MeetingId"
             name="meetingId"
+            readOnly="readonly"
             value={data.meetingId}
           />
           <label for="password">Password</label>
@@ -120,34 +150,81 @@ const QuizTable = () => {
             id="password"
             name="password"
             value={data.password}
+            onChange={(e) => onInputChange(e)}
           />
+          <label for="date">Date</label>
+          <input
+            type="date"
+            className="form-control"
+            id="date"
+            value={data.date}
+            name="date"
+            onChange={(e) => onInputChange(e)}
+          />
+
+          <label for="startTime">Start Time</label>
+          <input
+            type="time"
+            step="1"
+            id="startTime"
+            name="startTime"
+            className="form-control"
+            value={data.startTime}
+            onChange={(e) => onInputChange(e)}
+            min="09:00"
+            max="18:00"
+            required
+          />
+
+          <label for="endTime">End Time</label>
+          <input
+            type="time"
+            step="1"
+            id="endTime"
+            name="endTime"
+            className="form-control"
+            value={data.endTime}
+            onChange={(e) => onInputChange(e)}
+            min="09:00"
+            max="18:00"
+            required
+          />
+
           <label for="duration">Duration</label>
           <input
             type="text"
-            class="form-control"
             id="duration"
+             readOnly="readonly"
             name="duration"
-            value={data.duration}
+            className="form-control"
+            value={difference}
+            onChange={(e) => onInputChange(e)}
+            required
           />
-          <label for="meetingId">Due Date</label>
-          <input
-            type="text"
+
+          <label for="status">Status</label>
+          <select
             class="form-control"
-            id="meetingId"
-            name="meetingId"
-            value={data.dueDate}
-          />
+            id="status"
+            aria-label="Default select example"
+            onChange={(e) => onInputChange(e)}
+            name="status"
+          >
+            <option selected>{data.status}</option>
+            <option value="available">available</option>
+            <option value="expire">expire</option>
+          </select>
           <label for="exampleFormControlTextarea1">Description</label>
           <textarea
             class="form-control"
             id="description"
             rows="3"
+            name="description"
             value={data.description}
+            onChange={(e) => onInputChange(e)}
           ></textarea>
         </Modal>
       )}
-      <modal>abc</modal>
-      <modal>def</modal>
     </div>
   );
 };

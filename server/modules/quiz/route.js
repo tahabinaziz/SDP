@@ -2,16 +2,26 @@ const express = require("express");
 const router = express.Router();
 const controller = require('./controller');
 
-/*Create Course */
+/**********************************************QUIZ-WEB************************************************* */
+
+/*Create Quiz */
 router.post("/",controller.create);
 
-/*Get Course */
+/*Get Quiz */
 router.get("/",controller.get);
 
-/*Update Course */
-router.get("/",controller.update);
+/*Get Quiz By Id */
+router.get("/:id",controller.getById);
 
-/*Delete Course */
-router.get("/",controller.delete);
+/*Update Quiz */
+router.patch("/:id",controller.update);
+
+/*Delete Quiz */
+router.delete("/:id",controller.delete);
+
+/**********************************************QUIZ-MOBILE************************************************* */
+
+/*Get Quiz By meetingId & password */
+router.post("/quizDetail/",controller.quizDetail);
 
 module.exports = router;

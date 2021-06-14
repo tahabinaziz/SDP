@@ -3,7 +3,6 @@ import Cards from "../../component/dashboard/Cards";
 import Footer from "../../component/dashboard/Footer";
 import Navbar from "../../component/dashboard/Navbar";
 import SideNavbar from "../../component/dashboard/SideNavbar";
-import QuizTable from "../../component/dashboard/QuizTable";
 const Question = (props)=>{
     return(
         <div>
@@ -18,7 +17,7 @@ const Question = (props)=>{
                 <li class="breadcrumb-item active">Question Tab</li>
               </ol>
               <Cards />
-              <QuizTable />
+              Question Graph
             </div>
           </main>
           <Footer />

@@ -7,6 +7,8 @@ export const AppRoutes = {
     AddStudent:"/addStudent",
     ViewStudent:"/viewStudent",
     AddQuiz:"/addQuiz",
-    ViewQuiz:"/viewQuiz"
+    ViewQuiz:"/viewQuiz",
+    AddQuestion:"/addQuestion",
+    ViewQuestion:"/viewQuestion"
   }
   
