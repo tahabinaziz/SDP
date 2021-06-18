@@ -10,7 +10,7 @@ exports.get = async (req, res) => {
       return sendResponse(res, true, "Not Found", 404, {});
     }
    // res.send(quiz)
-    return sendResponse(res, true, "Records", 200, { quiz });
+    return sendResponse(res, true, "Ok", 200, { quiz });
   } catch (err) {
     return sendResponse(res, false, "Something Went Wrong " + err, 500, {});
   }
@@ -24,7 +24,7 @@ exports.getById = async (req, res) => {
     if (quiz == null) {
       return sendResponse(res, true, "Not Found", 404, {});
     } else {
-      return sendResponse(res, true, "Created Successfully", 200, { quiz });
+      return sendResponse(res, true, "Ok", 200, { quiz });
     }
   } catch (err) {
     return sendResponse(res, false, "Something Went Wrong " + err, 500, {});

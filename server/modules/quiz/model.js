@@ -12,4 +12,4 @@ date:{ type: String,required:false},
 emailRegex:{ type: String,required:false},
 status:{ type: String,required:true},
 },{ versionKey: false })
-module.exports = Course = mongoose.model("quiz",quizSchema);
+module.exports = Quiz = mongoose.model("quiz",quizSchema);
