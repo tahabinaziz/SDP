@@ -47,7 +47,6 @@ const QuizForm = () => {
 
   return (
     <div>
-      {/* {console.log(start)} */}
       <form onSubmit={(e) => onSubmit(e)}>
         <div className="form-row">
           <div className="form-group col-md-6">

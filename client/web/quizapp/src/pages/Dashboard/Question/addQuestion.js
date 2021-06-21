@@ -2,6 +2,7 @@ import React from "react";
 import Footer from "../../../component/dashboard/Footer";
 import Navbar from "../../../component/dashboard/Navbar";
 import SideNavbar from "../../../component/dashboard/SideNavbar";
+import QustionForm from "../../../component/form/QustionForm";
 
 
 const AddQuestion = (props)=>{
@@ -17,7 +18,7 @@ const AddQuestion = (props)=>{
               <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">Create Question Tab</li>
               </ol>
-             
+             <QustionForm />
             
             </div>
           </main>
