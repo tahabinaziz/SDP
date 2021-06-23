@@ -109,15 +109,15 @@ exports.quizDetail = async (req,res)=>{
     const {meetingId, password} = req.body;
     let quiz = await Quiz.findOne({ meetingId:meetingId,password:password}).exec();
     if(quiz== null){
-      return sendResponse(res, true, "invalid credentails", 400, {});
+      return sendResponse(res, false, "invalid credentails", 400, {});
     }
     
-    else{
+    else {
       if(quiz.status=="available"){
         return sendResponse(res, true, "available", 200, {quiz});
       }
       else{
-        return sendResponse(res, true, "expired", 400, {});
+        return sendResponse(res, false, "expired", 400, {});
       }
       
     }
