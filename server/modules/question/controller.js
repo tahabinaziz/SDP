@@ -34,6 +34,7 @@ exports.create = async (req, res) => {
       questionData: req.body.questionData.map((questionData) => {
         return {
           question: questionData.question,
+          questionType:questionData.questionType,
           option: questionData.option,
           answer: questionData.answer,
         };
@@ -72,6 +73,7 @@ exports.update = async (req, res) => {
           questionData: req.body.questionData.map((questionData) => {
             return {
               question: questionData.question,
+              questionType:questionData.questionType,
               option: questionData.option,
               answer: questionData.answer,
             };

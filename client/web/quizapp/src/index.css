@@ -10260,3 +10260,10 @@ body {
 .sb-sidenav-light .sb-sidenav-footer {
   background-color: #e9ecef;
 }
+
+.position{
+  float:right;
+}
+.space-between{
+  margin-left: 1rem !important;
+}

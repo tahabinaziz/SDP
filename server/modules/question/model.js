@@ -6,6 +6,7 @@ const questionSchema = new mongoose.Schema(
     questionData: [
       {
         question: { type: String, required: true },
+        questionType:{type: String, required: true},
         option: [String],
         answer: { type: String, required: true },
       },
