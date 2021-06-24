@@ -1,34 +1,63 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../../index.css";
+import { MCQ, TF, BLANK } from "../../Constant/constant";
+import {craeteQuestion} from "../../api/question";
+import axios from "axios";
+
 const QuestionForm = () => {
   const defaultArray = [
     {
       question: "",
       questionType: "",
       answer: "",
+      option: [],
     },
   ];
   const [radio, setRadio] = useState([]);
   const [meeting, setMeeting] = useState({ meetingId: "" });
   let { meetingId } = meeting;
-  const [questions, setQuestion] = useState(defaultArray);
-  const [option, setOption] = useState([]);
+  const [questionData, setQuestion] = useState(defaultArray);
 
   const onInputMeeting = (e) => {
     e.preventDefault();
     setMeeting({ ...meeting, [e.target.name]: e.target.value });
   };
 
-  const onInputChange = (e, index) => {
+  const onInputChange = (e, index, ind) => {
     e.preventDefault();
-    questions[index][e.target.name] = e.target.value;
-    setQuestion(questions);
+    setQuestion(
+      [...questionData].map((object, i) => {
+        if (i === index) {
+          object.option[ind] = e.target.value;
+          return object;
+        } else return object;
+      })
+    );
   };
 
-  const OnChnageOption = (value, id) => {
+  const optArr = [
+    {
+      value: "t/f",
+      option: ["T", "F"],
+    },
+    {
+      value: "mcqs",
+      option: ["", "", "", ""],
+    },
+    {
+      value: "blank",
+      option: [""],
+    },
+  ];
+  const OnChnageOption = (value, id, index) => {
+    console.log(value, id, "checkvalues");
     const findIndex = radio.filter((i) => i.id !== id);
     findIndex.push({ id, value });
     setRadio(findIndex);
+    const temp = questionData;
+    temp[id].option = optArr[index].option;
+    temp[id].questionType = value.toUpperCase();
+    setQuestion(temp);
   };
 
   const addRow = () => {
@@ -38,14 +67,33 @@ const QuestionForm = () => {
     ]);
   };
   const removeRow = (index) => {
-    const list = [...questions];
+    const list = [...questionData];
     list.splice(index, 1);
     setQuestion(list);
   };
-  console.log(radio, "checkradio");
+  // console.log(questionData, "hello");
+
+  const onSumbit = async (e) => {
+    e.preventDefault();
+    const data = {meetingId:meeting.meetingId,questionData}
+  
+    console.log(data,"DATA")  
+    console.log(questionData,"questions")
+     await craeteQuestion(data)
+  // return  axios.post(`http://localhost:5000/api/question/`, questions)
+  };
+
+  const getLables = (option, index) => {
+    if (option === 4) {
+      return MCQ[index];
+    } else if (option === 2) {
+      return TF[index];
+    } else if (option === 1) {
+      return BLANK[index];
+    }
+  };
   return (
     <div>
-      {/* onSubmit={(e) => onSubmit(e)} */}
       <form>
         <div className="container">
           <div className="form-row">
@@ -61,7 +109,7 @@ const QuestionForm = () => {
               />
             </div>
           </div>
-          {questions.map((item, index) => {
+          {questionData.map((item, index) => {
             const mcqs =
               radio.length > 0 &&
               radio.find((i) => i.id === index && i.value === "mcqs");
@@ -71,18 +119,16 @@ const QuestionForm = () => {
             const blank =
               radio.length > 0 &&
               radio.find((i) => i.id === index && i.value === "blank");
-            console.log(radio, mcqs, tf, blank, "getmcqs");
             return (
               <div className="jumbotron" key={index}>
                 <div class="form-check form-check-inline">
                   <input
                     class="form-check-input"
                     type="radio"
-                    // name={}
                     id="t/f"
                     value="t/f"
                     checked={tf}
-                    onChange={() => OnChnageOption("t/f", index)}
+                    onChange={() => OnChnageOption("t/f", index, 0)}
                   />
                   <label class="form-check-label" for="t/f">
                     T/F
@@ -92,11 +138,10 @@ const QuestionForm = () => {
                   <input
                     class="form-check-input"
                     type="radio"
-                    // name="inlineRadioOptions2"
                     id="mcqs"
                     value="mcqs"
                     checked={mcqs}
-                    onChange={() => OnChnageOption("mcqs", index)}
+                    onChange={() => OnChnageOption("mcqs", index, 1)}
                   />
                   <label class="form-check-label" for="mcqs">
                     MCQ'S
@@ -106,11 +151,10 @@ const QuestionForm = () => {
                   <input
                     class="form-check-input"
                     type="radio"
-                    // name="inlineRadioOptions3"
                     id="blank"
                     value="blank"
                     checked={blank}
-                    onChange={() => OnChnageOption("blank", index)}
+                    onChange={() => OnChnageOption("blank", index, 2)}
                   />
                   <label class="form-check-label" for="blank">
                     Blank
@@ -127,7 +171,15 @@ const QuestionForm = () => {
                       data-id={index}
                       name="question"
                       value={item.question}
-                      onChange={(e) => onInputChange(e, index)}
+                      onChange={(e) => {
+                        setQuestion(
+                          [...questionData].map((object, i) => {
+                            if (i === index) {
+                              return { ...object, question: e.target.value };
+                            } else return object;
+                          })
+                        );
+                      }}
                     />
                   </div>
                   <div className="form-group col-md-5">
@@ -139,108 +191,36 @@ const QuestionForm = () => {
                       name="answer"
                       data-id={index}
                       value={item.answer}
-                      onChange={(e) => onInputChange(e, index)}
+                      onChange={(e) => {
+                        setQuestion(
+                          [...questionData].map((object, i) => {
+                            if (i === index) {
+                              return { ...object, answer: e.target.value };
+                            } else return object;
+                          })
+                        );
+                      }}
                     />
                   </div>
                 </div>
 
-                {tf && (
-                  <div className="form-row">
-                    <div className="form-group col-md-3">
-                      <label for="t">A</label>
+                <div className="form-row">
+                  {item?.option?.map((i, ind) => (
+                    <div key={ind} className="form-group col-md-3">
+                      <label for="t">
+                        {getLables(item.option.length, ind)}
+                      </label>
                       <input
                         type="text"
                         className="form-control"
                         id="t"
-                        data-id={index}
-                        name="t"
-                        value="t"
-                        //  onChange={(e) => onChangOption(e)}
+                        name="formOption"
+                        value={i}
+                        onChange={(e) => onInputChange(e, index, ind)}
                       />
                     </div>
-                    <div className="form-group col-md-3">
-                      <label for="b">B</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="f"
-                        name="f"
-                        data-id={index}
-                        value="f"
-                        // onChange={(e) => onChangOption(e)}
-                      />
-                    </div>
-                  </div>
-                )}
-                {mcqs && (
-                  <div className="form-row">
-                    <div className="form-group col-md-3">
-                      <label for="option1">A</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="option1"
-                        data-id={index}
-                        name="option1"
-                        value={item.option1}
-                        // onChange={(e) => onChangOption(e)}
-                      />
-                    </div>
-                    <div className="form-group col-md-3">
-                      <label for="option2">B</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="option2"
-                        name="option2"
-                        data-id={index}
-                        value={item.option2}
-                        //onChange={(e) => onChangOption(e)}
-                      />
-                    </div>
-                    <div className="form-group col-md-3">
-                      <label for="option3">C</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="option3"
-                        name="option3"
-                        data-id={index}
-                        value={item.option3}
-                        //  onChange={(e) => onChangOption(e)}
-                      />
-                    </div>
-                    <div className="form-group col-md-3">
-                      <label for="option4">D</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="option4"
-                        name="option4"
-                        data-id={index}
-                        value={item.option4}
-                        // onChange={(e) => onChangOption(e)}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {blank && (
-                  <div className="form-row">
-                    <div className="form-group col-md-3">
-                      <label for="blank">Blank</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="blank"
-                        name="blank"
-                        data-id={index}
-                        // value={blank}
-                        // onChange={(e) => onChangOption(e)}
-                      />
-                    </div>
-                  </div>
-                )}
+                  ))}
+                </div>
 
                 <button
                   type="button"
@@ -259,8 +239,16 @@ const QuestionForm = () => {
               </div>
             );
           })}
+        
         </div>
       </form>
+      <button
+           
+            className="btn btn-success position"
+            onClick={onSumbit}
+          >
+            Submit
+          </button>
     </div>
   );
 };
