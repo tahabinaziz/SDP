@@ -2,9 +2,9 @@ import { useState } from "react";
 import "../../index.css";
 import { MCQ, TF, BLANK } from "../../Constant/constant";
 import {craeteQuestion} from "../../api/question";
-import axios from "axios";
-
+import { useHistory } from "react-router-dom";
 const QuestionForm = () => {
+  let history = useHistory();
   const defaultArray = [
     {
       question: "",
@@ -13,11 +13,12 @@ const QuestionForm = () => {
       option: [],
     },
   ];
+
   const [radio, setRadio] = useState([]);
   const [meeting, setMeeting] = useState({ meetingId: "" });
   let { meetingId } = meeting;
   const [questionData, setQuestion] = useState(defaultArray);
-
+ 
   const onInputMeeting = (e) => {
     e.preventDefault();
     setMeeting({ ...meeting, [e.target.name]: e.target.value });
@@ -80,6 +81,7 @@ const QuestionForm = () => {
     console.log(data,"DATA")  
     console.log(questionData,"questions")
      await craeteQuestion(data)
+     history.push("/viewQuestion");
   // return  axios.post(`http://localhost:5000/api/question/`, questions)
   };
 
