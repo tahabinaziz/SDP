@@ -39,9 +39,9 @@ class RequestHandler {
         //  httpHeaders.updateValue("application/json", forKey: "Accept")
         //   httpHeaders.updateValue("AppConstants.Secrets.clientId", forKey: "X-client-id")
         //   httpHeaders.updateValue("AppConstants.Secrets.clientSecret", forKey: "X-client-secret")
-        if let token = AppStateManager.shared.loggedInUser?.token {
-            httpHeaders.updateValue("Bearer \(token)", forKey: "Authorization")
-        }
+//        if let token = AppStateManager.shared.loggedInUser?.token {
+//            httpHeaders.updateValue("Bearer \(token)", forKey: "Authorization")
+//        }
         // device meta data
         let deviceMetaData = "iPhone" // Util.getDeviceMetadata()
         //    httpHeaders.updateValue(deviceMetaData, forKey: "device")

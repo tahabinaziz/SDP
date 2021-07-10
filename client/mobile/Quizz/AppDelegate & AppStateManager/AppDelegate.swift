@@ -16,6 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         return true
     }
+    
+    func setRootViewController() {
+        let navigation = AppStoryboard.Main.instance.instantiateViewController(withIdentifier: "BaseNavigationController") as? UINavigationController
+        navigation?.setNavigationBarHidden(true, animated: false)
+        self.window?.rootViewController = nil;
+        self.window?.rootViewController = navigation
+    }
 
 }
 

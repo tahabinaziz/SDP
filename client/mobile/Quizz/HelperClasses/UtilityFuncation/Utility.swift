@@ -219,17 +219,17 @@ extension Utility
 // MARK:- INDICATOR
 extension Utility {
     func showLoader() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        let size = CGSize(width: 50, height: 50)
-        let bgColor = UIColor.clear//UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-        let activityData = ActivityData(size: size, message: "", messageFont: UIFont.systemFont(ofSize: 12), type: .ballClipRotate, color: ColorSheet.THEME_DARK_BLUE , padding: 0, displayTimeThreshold: 0, minimumDisplayTime: 1, backgroundColor: bgColor, textColor: UIColor.black)
-        
-        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//        let size = CGSize(width: 50, height: 50)
+//        let bgColor = UIColor.clear//UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+//        let activityData = ActivityData(size: size, message: "", messageFont: UIFont.systemFont(ofSize: 12), type: .ballClipRotate, color: ColorSheet.THEME_DARK_BLUE , padding: 0, displayTimeThreshold: 0, minimumDisplayTime: 1, backgroundColor: bgColor, textColor: UIColor.black)
+//        
+//        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
     }
     
     func hideLoader() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
     }
 }
 // MARK:- TOAST HELPER UTILITY
