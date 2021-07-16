@@ -13,9 +13,8 @@ const QuizForm = () => {
     meetingId: id,
     password: "",
     date: "",
-    startTime: "",
-    endTime: "",
     duration: "",
+
   });
 
   let {
@@ -23,20 +22,13 @@ const QuizForm = () => {
     password,
     title,
     description,
-    startTime,
-    endTime,
+    duration,
     date,
     meetingId,
-    duration,
-  } = quiz;
-  const start = `${date} ${startTime}`;
-  const end = `${date} ${endTime}`;
-  let difference = moment
-    .utc(moment(end).diff(moment(start)))
-    .format("HH:mm:ss");
 
+  } = quiz;
   const onInputChange = (e) => {
-    setQuiz({ ...quiz, duration: difference, [e.target.name]: e.target.value });
+    setQuiz({ ...quiz,  [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
@@ -86,48 +78,22 @@ const QuizForm = () => {
             />
           </div>
           <div className="form-group col-md-3">
-            <label for="duration">Start Time</label>
-            <input
-              type="time"
-              step="1"
-              id="startTime"
-              name="startTime"
-              className="form-control"
-              value={startTime}
-              onChange={(e) => onInputChange(e)}
-              min="09:00"
-              max="18:00"
-              required
-            />
-          </div>
-          <div className="form-group col-md-3">
-            <label for="duration">End Time</label>
-            <input
-              type="time"
-              step="1"
-              id="endTime"
-              name="endTime"
-              className="form-control"
-              value={endTime}
-              onChange={(e) => onInputChange(e)}
-              min="09:00"
-              max="18:00"
-              required
-            />
-          </div>
-          <div className="form-group col-md-3">
-            <label for="duration">Duration</label>
+            <label for="duration">Time Duration</label>
             <input
               type="text"
+              placeholder="00:00:00"
+              step="1"
               id="duration"
-              readOnly="readonly"
               name="duration"
               className="form-control"
-              value={difference}
+             
+              value={duration}
               onChange={(e) => onInputChange(e)}
+             
               required
             />
           </div>
+         
         </div>
         <div className="form-row">
           <div className="form-group col-md-4">
