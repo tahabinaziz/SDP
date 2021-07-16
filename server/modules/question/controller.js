@@ -1,4 +1,5 @@
 const Question = require("./model");
+const Answer = require("../answer/model");
 const sendResponse = require("../../utiles/common").sendResponse;
 
 /////////////////////////////////////////////////////Question/////////////////////////////////////////////
@@ -26,17 +27,32 @@ exports.preCheck = async (req, res) => {
   }
 };
 
+/*Answer Result*/
+
 /*Create Question*/
 exports.create = async (req, res) => {
   try {
+    let meetingId= req.body.meetingId;
     const addQuestion = new Question({
-      meetingId: req.body.meetingId,
-      questionData: req.body.questionData.map((questionData) => {
+      meetingId:meetingId,
+      questionData: req.body.questionData.map((questionData) => 
+      {
+        var qNumber = Math.floor(1000 + Math.random() * 9000);
+
+        const addAnswer  = new Answer({
+          qNumber: qNumber,
+          meetingId: meetingId,
+          question :questionData.question,
+          answer:questionData.answer
+        });  
+         addAnswer.save();
+
         return {
+          qNumber :qNumber,
           question: questionData.question,
           questionType:questionData.questionType,
           option: questionData.option,
-          answer: questionData.answer,
+          answer: questionData.answer
         };
       }),
     });

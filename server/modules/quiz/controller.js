@@ -39,8 +39,6 @@ exports.create = async (req, res) => {
       password,
       title,
       description,
-      startTime,
-      endTime,
       duration,
       emailRegex,
       date,
@@ -57,8 +55,6 @@ exports.create = async (req, res) => {
       duration,
       emailRegex,
       date,
-      startTime,
-      endTime,
       status:"available"
     });
     let insertQuiz = await addQuiz.save();

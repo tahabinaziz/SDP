@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Modal from "../dashboard/Modal";
-import moment from "moment";
+import moment, { duration } from "moment";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 // import { getQuiz } from "../../api/quiz";
@@ -24,15 +24,15 @@ const QuizTable = () => {
   };
 
 
-  const { date, startTime, endTime, } = data;
-  const start = `${date} ${startTime}`;
-  const end = `${date} ${endTime}`;
-  const difference = moment
-    .utc(moment(end).diff(moment(start)))
-    .format("HH:mm:ss");
+  // const { date, startTime, endTime, } = data;
+  // const start = `${date} ${startTime}`;
+  // const end = `${date} ${endTime}`;
+  // const difference = moment
+  //   .utc(moment(end).diff(moment(start)))
+  //   .format("HH:mm:ss");
 
   const onInputChange = (e) => {
-    setData({ ...data,duration: difference, [e.target.name]: e.target.value });
+    setData({ ...data,[e.target.name]: e.target.value });
   };
 
   const loadQuiz=(value)=>{
@@ -162,42 +162,15 @@ loadData();
             onChange={(e) => onInputChange(e)}
           />
 
-          <label for="startTime">Start Time</label>
-          <input
-            type="time"
-            step="1"
-            id="startTime"
-            name="startTime"
-            className="form-control"
-            value={data.startTime}
-            onChange={(e) => onInputChange(e)}
-            min="09:00"
-            max="18:00"
-            required
-          />
-
-          <label for="endTime">End Time</label>
-          <input
-            type="time"
-            step="1"
-            id="endTime"
-            name="endTime"
-            className="form-control"
-            value={data.endTime}
-            onChange={(e) => onInputChange(e)}
-            min="09:00"
-            max="18:00"
-            required
-          />
 
           <label for="duration">Duration</label>
           <input
             type="text"
             id="duration"
-             readOnly="readonly"
+             
             name="duration"
             className="form-control"
-            value={difference}
+            value={data.duration}
             onChange={(e) => onInputChange(e)}
             required
           />

@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const admin = require('./modules/admin/route');
 const quiz = require('./modules/quiz/route');
 const question = require('./modules/question/route');
+const answer = require('./modules/answer/route');
 /*Middleware */
 // const auth = require('./middleware/auth');
 const app = express();
@@ -31,6 +32,7 @@ mongoose.connect("mongodb+srv://sdp:sdp@123@sdp.wkhmx.mongodb.net/myFirstDatabas
 app.use('/api/admin', admin);
 app.use('/api/quiz', quiz);
 app.use('/api/question', question);
+app.use('/api/answer',answer);
 
 
 
