@@ -1,10 +1,10 @@
 import { React } from "react";
-import Cards from "../../../component/dashboard/Cards";
+// import Cards from "../../../component/dashboard/Cards";
 import Footer from "../../../component/dashboard/Footer";
 import Navbar from "../../../component/dashboard/Navbar";
 import SideNavbar from "../../../component/dashboard/SideNavbar";
-import QuizTable from "../../../component/dashboard/QuizTable";
-import Modal from '../../../component/dashboard/Modal'
+import ResultTable from "../../../component/dashboard/ResultTable";
+import QuestionModal from '../../../component/dashboard/QuestionModal'
 
 const ViewQuiz = (props) => {
   return (
@@ -15,13 +15,13 @@ const ViewQuiz = (props) => {
         <div id="layoutSidenav_content">
           <main>
             <div class="container-fluid">
-              <h1 class="mt-4">View Quiz</h1>
+              <h1 class="mt-4">Result</h1>
               <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">View Quiz Tab</li>
+                <li class="breadcrumb-item active">View Result List</li>
               </ol>
               {/* <Cards /> */}
-              <Modal />
-              <QuizTable />
+              {/* <QuestionModal /> */}
+              <ResultTable />
             </div>
           </main>
           <Footer />

@@ -41,6 +41,7 @@ const SideNavbar = () => {
                 <i className="fas fa-angle-down"></i>
               </div>
             </a>
+            
             <div
               className="collapse"
               id="collapseLayouts"
@@ -93,6 +94,14 @@ const SideNavbar = () => {
                 </NavLink>
               </nav>
             </div>
+            <a className="nav-link" href="#">
+              <div className="sb-nav-link-icon">
+                <i className="fas fa-columns"></i>
+              </div>
+              <NavLink className="nav-link" exact to="/result">
+                Result
+              </NavLink>
+            </a>
           </div>
         </div>
         <div className="sb-sidenav-footer">

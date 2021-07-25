@@ -10,10 +10,16 @@ router.post("/",controller.create);
 
 /*Get Question */
 router.get("/",controller.getQuestion);
+/*Get Question */
+router.get("/table",controller.getQuestionTable);
+
+
+
 
 /*Get Question */
-router.put("/:id",controller.update);
+router.patch("/:id",controller.update);
 
+router.delete("/:id",controller.delete);
 
 module.exports = router;
 

@@ -3,7 +3,8 @@ const express = require("express");
 const router = express.Router();
 const controller = require('./controller');
 
-router.get("/",controller.answer);
-router.post("/as",controller.answer);
+router.post("/",controller.answer);
+router.get("/",controller.getResult);
+
 
 module.exports = router;
