@@ -9,6 +9,7 @@ const answer = require('./modules/answer/route');
 /*Middleware */
 // const auth = require('./middleware/auth');
 const app = express();
+app.use('/', express.static('build'));
 app.use(express.json());
 app.use(cors());
 
