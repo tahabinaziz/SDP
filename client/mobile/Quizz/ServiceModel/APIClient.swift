@@ -464,7 +464,7 @@ enum APIClient: URLRequestConvertible {
         return manager
     }()
     
-    static private func callAPIAndGetRequest(request: APIClient, showLoader: Bool = true, loaderText: String? = nil, errorContainerView: UIView? = nil, isBeingRetried: Bool = false, returnTheWholeResponse: Bool = false, uploadBlock:((Double) -> Void)? = nil, onSuccess successBlock: ((Any) -> Void)?, onFailure failureBlock: ((ShifaamError) -> Void)?) -> DataRequest {
+    static private func callAPIAndGetRequest(request: APIClient, showLoader: Bool = true, loaderText: String? = nil, errorContainerView: UIView? = nil, isBeingRetried: Bool = false, returnTheWholeResponse: Bool = false, uploadBlock:((Double) -> Void)? = nil, onSuccess successBlock: ((Any) -> Void)?, onFailure failureBlock: ((CustomError) -> Void)?) -> DataRequest {
         if showLoader {
             if loaderText != "" && loaderText != nil {
                 //                ProgressView.showWithStatus(title: loaderText)
@@ -477,7 +477,7 @@ enum APIClient: URLRequestConvertible {
         
         let responseCompletion: (DataResponse<Any>) -> Void = { (response) in
             
-            let handleFailure: (_: ShifaamError, _: Any, _: Error?) -> Void = {boloroError, log, errorObject in
+            let handleFailure: (_: CustomError, _: Any, _: Error?) -> Void = {boloroError, log, errorObject in
                 debugPrint("FAILURE(\((response.response != nil) ? response.response!.statusCode : 0)) [\(response.request!.url!.relativePath)]: \(log)")
                 switch response.result {
                 case .success(let object):
@@ -605,13 +605,13 @@ enum APIClient: URLRequestConvertible {
         }
     }
     
-    static func callAPI(request: APIClient, showLoader: Bool = true, loaderText: String? = nil, errorContainerView: UIView? = nil, isBeingRetried: Bool = false, returnTheWholeResponse: Bool = false, uploadBlock:((Double) -> Void)? = nil, onSuccess successBlock: ((Any) -> Void)?, onFailure failureBlock: ((ShifaamError) -> Void)?) {
+    static func callAPI(request: APIClient, showLoader: Bool = true, loaderText: String? = nil, errorContainerView: UIView? = nil, isBeingRetried: Bool = false, returnTheWholeResponse: Bool = false, uploadBlock:((Double) -> Void)? = nil, onSuccess successBlock: ((Any) -> Void)?, onFailure failureBlock: ((CustomError) -> Void)?) {
         URLCache.shared.removeAllCachedResponses()
         let _ = callAPIAndGetRequest(request: request, showLoader: showLoader, loaderText: loaderText, errorContainerView: errorContainerView, isBeingRetried: isBeingRetried, returnTheWholeResponse: returnTheWholeResponse, uploadBlock: uploadBlock, onSuccess: successBlock, onFailure: failureBlock)
     }
     
     
-    static func uploadImage(request: APIClient, parameter: [String : Any]?,imageData: Data, key: String, mimeType: String, uploadBlock:((Double) -> Void)? = nil, returnTheWholeResponse: Bool = false, onSuccess successBlock: ((Any) -> Void)?, onFailure failureBlock: ((ShifaamError) -> Void)?) {
+    static func uploadImage(request: APIClient, parameter: [String : Any]?,imageData: Data, key: String, mimeType: String, uploadBlock:((Double) -> Void)? = nil, returnTheWholeResponse: Bool = false, onSuccess successBlock: ((Any) -> Void)?, onFailure failureBlock: ((CustomError) -> Void)?) {
         URLCache.shared.removeAllCachedResponses()
         
         Alamofire.upload(multipartFormData: { (uploadData) in
@@ -629,7 +629,7 @@ enum APIClient: URLRequestConvertible {
                             case .success(let upload, _, _):
                                 upload.responseJSON { (response) in
                                     
-                                    let handleFailure: (_: ShifaamError, _: Any, _: Error?) -> Void = {boloroError, log, errorObject in
+                                    let handleFailure: (_: CustomError, _: Any, _: Error?) -> Void = {boloroError, log, errorObject in
                                         debugPrint("FAILURE(\((response.response != nil) ? response.response!.statusCode : 0)) [\(response.request!.url!.relativePath)]: \(log)")
                                         switch response.result {
                                         case .success(let object):
@@ -711,13 +711,13 @@ enum APIClient: URLRequestConvertible {
                                 }
                             case .failure(let error):
                                 debugPrint(error.localizedDescription)
-                                failureBlock?(ShifaamError(errorCode: "11111", errorMsg: error.localizedDescription, statusCode: 1111, data: [:])!)
+                                failureBlock?(CustomError(errorCode: "11111", errorMsg: error.localizedDescription, statusCode: 1111, data: [:])!)
                             }
         }
         
     }
     
-    static func callMultipartAPI(request: APIClient, parameter: [String : Any]?, fileURL: URL?, fileName: String?, fileKey: String, mimeType: String, imageData: Data, uploadBlock:((Double) -> Void)? = nil, returnTheWholeResponse: Bool = false, onSuccess successBlock: ((Any) -> Void)?, onFailure failureBlock: ((ShifaamError) -> Void)?) {
+    static func callMultipartAPI(request: APIClient, parameter: [String : Any]?, fileURL: URL?, fileName: String?, fileKey: String, mimeType: String, imageData: Data, uploadBlock:((Double) -> Void)? = nil, returnTheWholeResponse: Bool = false, onSuccess successBlock: ((Any) -> Void)?, onFailure failureBlock: ((CustomError) -> Void)?) {
         
         URLCache.shared.removeAllCachedResponses()
         
@@ -751,7 +751,7 @@ enum APIClient: URLRequestConvertible {
                             case .success(let upload, _, _):
                                 upload.responseJSON { (response) in
                                     
-                                    let handleFailure: (_: ShifaamError, _: Any, _: Error?) -> Void = {boloroError, log, errorObject in
+                                    let handleFailure: (_: CustomError, _: Any, _: Error?) -> Void = {boloroError, log, errorObject in
                                         debugPrint("FAILURE(\((response.response != nil) ? response.response!.statusCode : 0)) [\(response.request!.url!.relativePath)]: \(log)")
                                         switch response.result {
                                         case .success(let object):
@@ -833,12 +833,12 @@ enum APIClient: URLRequestConvertible {
                                 }
                             case .failure(let error):
                                 debugPrint(error.localizedDescription)
-                                failureBlock?(ShifaamError(errorCode: "11111", errorMsg: error.localizedDescription, statusCode: 1111, data: [:])!)
+                                failureBlock?(CustomError(errorCode: "11111", errorMsg: error.localizedDescription, statusCode: 1111, data: [:])!)
                             }
         }
     }
     
-//    static func invokeMultipartAPI(request: APIClient, parameter: [String : Any], fileData: Data, fileName: String, fileKey: String, mimeType: String, uploadBlock:((Double) -> Void)? = nil, returnTheWholeResponse: Bool, onSuccess successBlock: ((Any) -> Void)?, onFailure failureBlock: ((ShifaamError) -> Void)?) {
+//    static func invokeMultipartAPI(request: APIClient, parameter: [String : Any], fileData: Data, fileName: String, fileKey: String, mimeType: String, uploadBlock:((Double) -> Void)? = nil, returnTheWholeResponse: Bool, onSuccess successBlock: ((Any) -> Void)?, onFailure failureBlock: ((CustomError) -> Void)?) {
 //
 //
 //        Alamofire.upload(multipartFormData: { (uploadData) in
@@ -855,7 +855,7 @@ enum APIClient: URLRequestConvertible {
 //            case .success(let upload, _, _):
 //                upload.responseJSON { (response) in
 //
-//                    let handleFailure: (_: ShifaamError, _: Any, _: Error?) -> Void = {boloroError, log, errorObject in
+//                    let handleFailure: (_: CustomError, _: Any, _: Error?) -> Void = {boloroError, log, errorObject in
 //                        debugPrint("FAILURE(\((response.response != nil) ? response.response!.statusCode : 0)) [\(response.request!.url!.relativePath)]: \(log)")
 //                        switch response.result {
 //                        case .success(let object):
@@ -924,7 +924,7 @@ enum APIClient: URLRequestConvertible {
 //                }
 //            case .failure(let error):
 //                debugPrint(error.localizedDescription)
-//                failureBlock?(ShifaamError(errorCode: "11111", errorMsg: error.localizedDescription, statusCode: 1111, data: [:])!)
+//                failureBlock?(CustomError(errorCode: "11111", errorMsg: error.localizedDescription, statusCode: 1111, data: [:])!)
 //            }
 //        }
 //    }
@@ -940,32 +940,32 @@ enum APIClient: URLRequestConvertible {
      
      @return the error
      */
-    fileprivate static func handleError(jsonDict: [String: AnyObject]?) -> ShifaamError? {
-        let shifaamError = ShifaamError()
+    fileprivate static func handleError(jsonDict: [String: AnyObject]?) -> CustomError? {
+        let CustomError = CustomError()
         if jsonDict != nil {
             if let errorCode = jsonDict!["error_code"] as? String, errorCode != "" {
-                shifaamError.errorCode = errorCode
+                CustomError.errorCode = errorCode
             }
             else if let statusCode = jsonDict!["statuscode"] as? Int64 {
-                shifaamError.errorCode = "\(statusCode)"
+                CustomError.errorCode = "\(statusCode)"
             }
             if let errorMsg = jsonDict!["message"] as? String, errorMsg != "" {
-                shifaamError.errorMsg = errorMsg
+                CustomError.errorMsg = errorMsg
             }
             else if let errorMsg = jsonDict!["message"] as? String, errorMsg != "" {
-                shifaamError.errorMsg = errorMsg
+                CustomError.errorMsg = errorMsg
             }
             
         }
-        return shifaamError
+        return CustomError
     }
     
-    fileprivate static func handleError(message: String, code: String, data: Any?) -> ShifaamError {
-        let shifaamError = ShifaamError()
-        shifaamError.errorMsg = message
-        shifaamError.errorCode = code
-        shifaamError.data = data as? [String : Any] ?? [:]
-        return shifaamError
+    fileprivate static func handleError(message: String, code: String, data: Any?) -> CustomError {
+        let CustomError = CustomError()
+        CustomError.errorMsg = message
+        CustomError.errorCode = code
+        CustomError.data = data as? [String : Any] ?? [:]
+        return CustomError
     }
     
     func URLforRoute(route: String,params:[String: String]) -> NSURL? {

