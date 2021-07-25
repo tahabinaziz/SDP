@@ -9,6 +9,7 @@ export const AppRoutes = {
     AddQuiz:"/addQuiz",
     ViewQuiz:"/viewQuiz",
     AddQuestion:"/addQuestion",
-    ViewQuestion:"/viewQuestion"
+    ViewQuestion:"/viewQuestion",
+    Result:"/result"
   }
   

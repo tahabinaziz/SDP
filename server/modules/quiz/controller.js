@@ -1,4 +1,7 @@
 const Quiz = require("./model");
+const Question = require("../question/model");
+const QTable = require("../question/qtmodel");
+const Answer = require ("../answer/model");
 const sendResponse = require("../../utiles/common").sendResponse;
 /////////////////////////////////////////////////////Quiz/////////////////////////////////////////////
 /*Get Quiz*/
@@ -84,13 +87,17 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     let id = req.params.id;
-    let quizExist = await Quiz.findOne({ _id: id }).exec();
+    let meetingId = req.query.meetingId;
+    let quizExist = await Quiz.findOne({ _id: id, meetingId:meetingId }).exec();
 
     if (!quizExist) {
       return res.status(404).json({ message: "Not Found" });
     }
 
     await Quiz.deleteOne({ _id: id }).exec();
+    await Question.deleteMany({ meetingId: meetingId }).exec();
+    await Qtable.deleteOne({ meetingId: meetingId }).exec();
+    await Answer.deleteOne({ meetingId: meetingId }).exec();
     res.status(200).json({ message: "Quiz Deleted Successfully" });
   } catch (err) {
     return res.status(500).json({ error: err.message });
