@@ -20,7 +20,7 @@ const QuizTable = (props) => {
   const loadData = async () => {
     console.log("hello");
     // let result = await getQuiz()
-    const result = await axios.get(`http://localhost:5000/api/answer/?meetingId=${meetingId}`);
+    const result = await axios.get(`https://quizapp-sdp.herokuapp.com/api/answer/?meetingId=${meetingId}`);
     setQuiz(result.data.data.results);
     console.log(result.data.data.results);
   };

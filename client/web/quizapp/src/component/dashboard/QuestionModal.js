@@ -13,7 +13,7 @@ const ModalPopUp = ({ display, onCloseModal, data, loadQuiz,children }) => {
     e.preventDefault();
    console.log(data);
 
-   let edit = await axios.patch(`http://localhost:5000/api/question/${data._id}`, data);
+   let edit = await axios.patch(`https://quizapp-sdp.herokuapp.com/api/question/${data._id}`, data);
    console.log(edit)
    if(edit.status==200){
      loadQuiz(true);

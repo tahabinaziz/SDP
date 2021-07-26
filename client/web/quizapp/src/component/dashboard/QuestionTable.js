@@ -22,7 +22,7 @@ const QuizTable = () => {
   const loadData = async () => {
     console.log("hello");
     // let result = await getQuiz()
-    const result = await axios.get(`http://localhost:5000/api/question/table/?meetingId=${meetingId}`);
+    const result = await axios.get(`https://quizapp-sdp.herokuapp.com/api/question/table/?meetingId=${meetingId}`);
     setQuiz(result.data.data.questions);
     console.log(result.data.data.questions);
   };
@@ -58,7 +58,7 @@ const QuizTable = () => {
   }
   const deleteRecord= async(id)=>{
     console.log(id)
-await axios.delete(`http://localhost:5000/api/question/${id}`);
+await axios.delete(`https://quizapp-sdp.herokuapp.com/api/question/${id}`);
 loadData();
 
   }
