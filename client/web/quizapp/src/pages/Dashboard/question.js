@@ -16,8 +16,8 @@ const Question = (props)=>{
               <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">Question Tab</li>
               </ol>
-              <Cards />
-              Question Graph
+              {/* <Cards />
+              Question Graph */}
             </div>
           </main>
           <Footer />

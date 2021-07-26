@@ -11,7 +11,7 @@ const Login = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const user = { email, password };
-    axios.post("http://localhost:5000/api/admin/login", user).then(
+    axios.post("https://quizapp-sdp.herokuapp.com/api/admin/login", user).then(
       (response) => {
         console.log(response.data.token);
         // set the state of the user

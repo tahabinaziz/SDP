@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Modal from "../dashboard/Modal";
+import QuestionModal from "../dashboard/QuestionModal";
 import moment, { duration } from "moment";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -7,34 +7,48 @@ import { useHistory } from "react-router-dom";
 
 const QuizTable = () => {
   let history = useHistory();
+  const [meet, setMeet]= useState({meetingId:''});
   const [quiz, setQuiz] = useState([]);
   const [disp, setDisp] = useState(false);
   const [data, setData] = useState({});
   //const [difference, setDifference] = useState();
 
+  let {meetingId } = meet;
+  console.log(meetingId)
+
   useEffect(() => {
     loadData();
-  }, []);
+  }, [meetingId]);
   const loadData = async () => {
     console.log("hello");
     // let result = await getQuiz()
-    const result = await axios.get(`https://quizapp-sdp.herokuapp.com/api/quiz/`);
-    setQuiz(result.data.data.quiz);
-    console.log(result.data.data.quiz);
+    const result = await axios.get(`https://quizapp-sdp.herokuapp.com/api/question/table/?meetingId=${meetingId}`);
+    setQuiz(result.data.data.questions);
+    console.log(result.data.data.questions);
   };
 
-
-  // const { date, startTime, endTime, } = data;
-  // const start = `${date} ${startTime}`;
-  // const end = `${date} ${endTime}`;
-  // const difference = moment
-  //   .utc(moment(end).diff(moment(start)))
-  //   .format("HH:mm:ss");
-
+  const onInputChangeM = (e) => {
+    setMeet({ ...meet,  [e.target.name]: e.target.value });
+  };
   const onInputChange = (e) => {
     setData({ ...data,[e.target.name]: e.target.value });
   };
 
+  const onSubmit=()=>{
+    let x = document.getElementById("button");
+    let y = document.getElementById("meetingId");
+    if (x.style.display === "none" && y.style.display) {
+      x.style.display = "block";
+      y.style.display = "block";
+  } else {
+      x.style.display = "none";
+      y.style.display = "none";
+  }
+
+  window.print();
+  x.style.display = "block";
+  y.style.display = "block";
+}
   const loadQuiz=(value)=>{
 
     setDisp(false)
@@ -43,7 +57,8 @@ const QuizTable = () => {
     }
   }
   const deleteRecord= async(id)=>{
-await axios.delete(`https://quizapp-sdp.herokuapp.com/api/quiz/${id}`);
+    console.log(id)
+await axios.delete(`https://quizapp-sdp.herokuapp.com/api/question/${id}`);
 loadData();
 
   }
@@ -52,8 +67,27 @@ loadData();
       <div className="card mb-4">
         <div className="card-header">
           <i className="fas fa-table mr-1"></i>
-          Quiz List
+          Questions
         </div>
+        <div className="row">
+            <div className="col-md-4">
+            </div>
+            <div className="col-md-4">
+           
+            <input
+              type="text"
+              className="form-control mt-4"
+              id="meetingId"
+              value={meetingId}
+             placeholder="Meeting Id"
+              onChange={(e) => onInputChangeM(e)}
+              name="meetingId"
+            />
+            </div>
+            <div className="col-md-4">
+            </div>
+        </div>
+
         <div className="card-body">
           <div className="table-responsive">
             <table
@@ -64,11 +98,11 @@ loadData();
             >
               <thead>
                 <tr>
-                  <th>Title</th>
+                  <th>Q.No</th>
                   <th>Meeting Id</th>
-                  <th>Password</th>
-                  <th>Date</th>
-                  <th>Duration</th>
+                  <th>Question</th>
+                  <th>Type</th>
+                  <th>Answer</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -77,11 +111,11 @@ loadData();
                 {quiz.map((item) => {
                   return (
                     <tr key={item._id}>
-                      <td>{item.title}</td>
+                      <td>{item.qNumber}</td>
                       <td>{item.meetingId}</td>
-                      <td>{item.password}</td>
-                      <td>{item.date}</td>
-                      <td>{item.duration}</td>
+                      <td>{item.question}</td>
+                      <td>{item.questionType}</td>
+                      <td>{item.answer}</td>
 
                       <td>
                         <ul className="list-inline m-0">
@@ -121,17 +155,25 @@ loadData();
               </tbody>
             </table>
           </div>
+          <button
+           id="button"
+           className="btn btn-success position"
+           onClick={onSubmit}
+         >
+           Submit
+         </button>
         </div>
       </div>
       {data && disp && (
-        <Modal display={disp} onCloseModal={() => setDisp(false)} data={data} loadQuiz={loadQuiz}>
+        <QuestionModal display={disp} onCloseModal={() => setDisp(false)} data={data} loadQuiz={loadQuiz}>
           <label for="Title">Title</label>
           <input
             type="text"
             class="form-control"
             id="Title"
-            name="title"
-            value={data.title}
+            readOnly
+            name="qNumber"
+            value={data.qNumber}
             onChange={(e) => onInputChange(e)}
           />
           <label for="meetingId">Meeting Id</label>
@@ -143,60 +185,41 @@ loadData();
             readOnly="readonly"
             value={data.meetingId}
           />
-          <label for="password">Password</label>
+          <label for="password">Question</label>
           <input
             type="text"
             class="form-control"
-            id="password"
-            name="password"
-            value={data.password}
+            id="question"
+            name="question"
+            value={data.question}
             onChange={(e) => onInputChange(e)}
           />
-          <label for="date">Date</label>
+          <label for="date">Type</label>
           <input
-            type="date"
+            type="text"
+            readOnly
             className="form-control"
-            id="date"
-            value={data.date}
-            name="date"
+            id="answerType"
+            value={data.questionType}
+            name="answerType"
             onChange={(e) => onInputChange(e)}
           />
 
 
-          <label for="duration">Duration</label>
+          <label for="duration">Answer</label>
           <input
             type="text"
             id="duration"
              
-            name="duration"
+            name="answer"
             className="form-control"
-            value={data.duration}
+            value={data.answer}
             onChange={(e) => onInputChange(e)}
             required
           />
 
-          <label for="status">Status</label>
-          <select
-            class="form-control"
-            id="status"
-            aria-label="Default select example"
-            onChange={(e) => onInputChange(e)}
-            name="status"
-          >
-            <option selected>{data.status}</option>
-            <option value="available">available</option>
-            <option value="expire">expire</option>
-          </select>
-          <label for="exampleFormControlTextarea1">Description</label>
-          <textarea
-            class="form-control"
-            id="description"
-            rows="3"
-            name="description"
-            value={data.description}
-            onChange={(e) => onInputChange(e)}
-          ></textarea>
-        </Modal>
+         
+        </QuestionModal>
       )}
     </div>
   );

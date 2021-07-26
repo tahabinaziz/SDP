@@ -122,40 +122,9 @@ const QuizForm = () => {
           </div>
         </div>
 
-        <div className="form-row">
-          <div className="form-group col-md-2">
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="gridCheck"
-                name="emailRegex"
-                checked={checkbox}
-                onChange={(e) => {
-                  setCheckbox(e.target.checked);
-                }}
-              />
-              <label className="form-check-label" for="gridCheck">
-                Email Validation
-              </label>
-            </div>
-          </div>
-          {checkbox ? (
-            <div className="form-group col-md-10">
-              <input
-                type="text"
-                className="form-control"
-                name="emailRegex"
-                id="description"
-                placeholder="Email Regex"
-                value={emailRegex}
-                onChange={(e) => onInputChange(e)}
-              />
-            </div>
-          ) : null}
-        </div>
+      
         <button type="submit" className="btn btn-primary">
-          Sign in
+          Submit
         </button>
       </form>
     </div>

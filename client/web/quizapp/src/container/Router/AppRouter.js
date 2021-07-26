@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Dashboard from "../../pages/Dashboard/dashboard";
 import Question from "../../pages/Dashboard/question";
 import Quiz from "../../pages/Dashboard/quiz";
-import Result from "../../pages/Dashboard/result";
+
 import AddStudent from "../../pages/RegisterStudent/addStudent";
 import ViewStudent from "../../pages/RegisterStudent/viewStudent";
 import Login from "../../pages/Login/login";
@@ -11,6 +11,7 @@ import AddQuiz from "../../pages/Dashboard/Quiz/addQuiz";
 import ViewQuiz from "../../pages/Dashboard/Quiz/viewQuiz";
 import AddQuestion from "../../pages/Dashboard/Question/addQuestion";
 import ViewQuestion from "../../pages/Dashboard/Question/viewQuestion";
+import Result from "../../pages/Dashboard/Result/result";
 import { ProtectedRoute } from "../Router/ProtectedRoutes";
 import { AppRoutes } from "./routes";
 

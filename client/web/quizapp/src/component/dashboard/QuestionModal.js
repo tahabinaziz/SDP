@@ -13,7 +13,7 @@ const ModalPopUp = ({ display, onCloseModal, data, loadQuiz,children }) => {
     e.preventDefault();
    console.log(data);
 
-   let edit = await axios.patch(`https://quizapp-sdp.herokuapp.com/api/quiz/${data._id}/?meetingId=${data.meetingId}`, data);
+   let edit = await axios.patch(`https://quizapp-sdp.herokuapp.com/api/question/${data._id}`, data);
    console.log(edit)
    if(edit.status==200){
      loadQuiz(true);
@@ -21,7 +21,7 @@ const ModalPopUp = ({ display, onCloseModal, data, loadQuiz,children }) => {
    else{
     loadQuiz(false);
    }
-     history.push("/quiz");
+     history.push("/viewQuestion");
   };
 
   return (

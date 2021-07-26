@@ -18,7 +18,7 @@ const Quiz = (props)=>{
               <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active">Quiz Tab</li>
               </ol>
-              <Cards />
+              {/* <Cards /> */}
               <QuizTable />
             
             </div>
