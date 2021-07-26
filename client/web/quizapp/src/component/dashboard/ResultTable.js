@@ -33,7 +33,7 @@ const QuizTable = (props) => {
   const onSubmit=()=>{
     let x = document.getElementById("button");
     let y = document.getElementById("meetingId");
-    if (x.style.display === "none" && y.style.display) {
+    if (x.style.display === "none" && y.style.display =="none") {
       x.style.display = "block";
       y.style.display = "block";
   } else {
@@ -116,7 +116,7 @@ const QuizTable = (props) => {
            className="btn btn-success position"
            onClick={onSubmit}
          >
-           Submit
+           Print
          </button>
         </div>
       </div>

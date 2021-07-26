@@ -23,7 +23,21 @@ const QuizTable = () => {
     console.log(result.data.data.quiz);
   };
 
+  const onSubmit=()=>{
+    let x = document.getElementById("button");
+   
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      
+  } else {
+      x.style.display = "none";
+      
+  }
 
+  window.print();
+  x.style.display = "block";
+ 
+}
   // const { date, startTime, endTime, } = data;
   // const start = `${date} ${startTime}`;
   // const end = `${date} ${endTime}`;
@@ -121,6 +135,13 @@ loadData();
               </tbody>
             </table>
           </div>
+          <button
+           id="button"
+           className="btn btn-success position"
+           onClick={onSubmit}
+         >
+           Print
+         </button>
         </div>
       </div>
       {data && disp && (

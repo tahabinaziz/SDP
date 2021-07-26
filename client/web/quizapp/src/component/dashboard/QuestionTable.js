@@ -160,7 +160,7 @@ loadData();
            className="btn btn-success position"
            onClick={onSubmit}
          >
-           Submit
+           Print
          </button>
         </div>
       </div>
