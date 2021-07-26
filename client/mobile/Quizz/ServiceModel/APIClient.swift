@@ -19,8 +19,11 @@ public enum APIClientResult {
 enum Route: String {
     
     // MARK: 5
-    // List
-    case specialization = "/v1/list/specializations"
+    
+    case specialization = ""
+    
+    case quizDetail = "api/quiz/quizDetail"
+    case getQuestions = "/api/question/?"
     case cities = "/v1/list/city"
     case verifyNumber = "/v1/verify-number"
     case services = "/v1/list/services"
@@ -110,6 +113,9 @@ enum APIClient: URLRequestConvertible {
     
     
     // MARK: 1
+    
+    case quizDetail(param: [String:Any])
+    case getQuestions(param: [String:Any])
     case specilizationList
     case citiesList
     case verifyNumber(param: [String:Any])
@@ -198,9 +204,9 @@ enum APIClient: URLRequestConvertible {
         var method: HTTPMethod {
             switch self {
             // MARK: 2
-            case .doctorsList, .specilizationList, .citiesList, .dashboardStats, .upcomingAppts, .clinics, .getVideoID, .patientProfile, .getLeaves, .getForumQuestions, .getForumComments, .getNotifications, .getRevenue, .getSchedule, .getMyProfile, .servies, .languages, .states, .cities, .areas, .referADoctor, .getFreeSlots, .getPhysicalSlots:
+            case .doctorsList, .specilizationList, .citiesList, .dashboardStats, .upcomingAppts, .clinics, .getVideoID, .patientProfile, .getLeaves, .getForumQuestions, .getForumComments, .getNotifications, .getRevenue, .getSchedule, .getMyProfile, .servies, .languages, .states, .cities, .areas, .referADoctor, .getFreeSlots, .getPhysicalSlots, .getQuestions:
                 return .get
-            case .login, .verifyNumber, .signup, .forgotPasswordRequest, .passwordReset, .searchPatient, .bookAnAppointment, .registerPatient, .gruveoHash, .giveFeedback, .saveQuestionaire, .addLeaves, .updateNotification, .addConsultation, .addFreeSlots, .uploadImage:
+            case .login, .verifyNumber, .signup, .forgotPasswordRequest, .passwordReset, .searchPatient, .bookAnAppointment, .registerPatient, .gruveoHash, .giveFeedback, .saveQuestionaire, .addLeaves, .updateNotification, .addConsultation, .addFreeSlots, .uploadImage, .quizDetail:
                 return .post
             case .addCareTeam, .updateLeave, .addForumComment, .deleteForumComment, .updateProfile, .addExperience, .updateExperience, .addEducation, .updateEducation, .addServices, .addLangauge, .addSpecialization, .addReferDoctor, .addPA, .updatePA, .updateEmailPassword, .updatePhysicalSlots:
                 return .put
@@ -213,7 +219,7 @@ enum APIClient: URLRequestConvertible {
             
             switch self {
             // MARK: 3
-            case .login(let param), .forgotPasswordRequest(let param), .signup(let param), .passwordReset(let param), .upcomingAppts(let param), .searchPatient(let param), .bookAnAppointment(let param), .verifyNumber(let param), .registerPatient(let param), .getVideoID(let param), .gruveoHash(let param), .patientProfile(let param), .addLeaves(let param), .deleteLeaves(let param), .getForumComments(let param), .getNotifications(let param), .updateNotification(let param), .getForumQuestions(let param), .getRevenue(let param), .getSchedule(let param), .updateEmailPassword(let param), .addForumComment(let param), .deleteForumComment(let param), .updateProfile(let param), .addExperience(let param), .addEducation(let param), .addServices(let param), .addLangauge(let param), .addSpecialization(let param), .cities(let param), .areas(let param), .referADoctor(let param), .addReferDoctor(let param), .addPA(let param), .addFreeSlots(let param), .deleteClinic(let param), .deleteExperience(let param), .deleteEducation(let param), .uploadImage(let param), .getPhysicalSlots(let param):
+            case .login(let param), .forgotPasswordRequest(let param), .signup(let param), .passwordReset(let param), .upcomingAppts(let param), .searchPatient(let param), .bookAnAppointment(let param), .verifyNumber(let param), .registerPatient(let param), .getVideoID(let param), .gruveoHash(let param), .patientProfile(let param), .addLeaves(let param), .deleteLeaves(let param), .getForumComments(let param), .getNotifications(let param), .updateNotification(let param), .getForumQuestions(let param), .getRevenue(let param), .getSchedule(let param), .updateEmailPassword(let param), .addForumComment(let param), .deleteForumComment(let param), .updateProfile(let param), .addExperience(let param), .addEducation(let param), .addServices(let param), .addLangauge(let param), .addSpecialization(let param), .cities(let param), .areas(let param), .referADoctor(let param), .addReferDoctor(let param), .addPA(let param), .addFreeSlots(let param), .deleteClinic(let param), .deleteExperience(let param), .deleteEducation(let param), .uploadImage(let param), .getPhysicalSlots(let param), .quizDetail(let param), .getQuestions(let param):
                 return param
             case .doctorsList(let docList):
                 return [
@@ -382,6 +388,10 @@ enum APIClient: URLRequestConvertible {
                 return Route.states.url()
             case .areas:
             return Route.areas.url()
+            case .quizDetail:
+                return Route.quizDetail.url()
+            case .getQuestions:
+                return Route.getQuestions.url()
             }
         }()
         

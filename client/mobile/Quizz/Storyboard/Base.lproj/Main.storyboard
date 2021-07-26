@@ -41,11 +41,11 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="prd-Ti-j9Y">
                                         <rect key="frame" x="0.0" y="0.0" width="358" height="50"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Quizz ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z5J-BL-J8r">
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="jlbq3m" placeholder="Quizz ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z5J-BL-J8r">
                                                 <rect key="frame" x="0.0" y="0.0" width="339" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iN6-H0-7bv">
                                                 <rect key="frame" x="0.0" y="48" width="339" height="2"/>
@@ -60,7 +60,7 @@
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lcx-gL-dnM">
                                         <rect key="frame" x="0.0" y="0.0" width="358" height="50"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fVP-IF-yOT">
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="qwerty" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fVP-IF-yOT">
                                                 <rect key="frame" x="0.0" y="0.0" width="339" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -95,7 +95,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="actionSubmit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gV1-Lw-vR0"/>
-                                    <segue destination="nOf-Ck-ody" kind="show" id="pyw-Mr-x3D"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -149,10 +148,10 @@
             </objects>
             <point key="canvasLocation" x="-1790" y="64"/>
         </scene>
-        <!--View Controller-->
+        <!--Quiz Detail Controller-->
         <scene sceneID="pmP-Q8-DJw">
             <objects>
-                <viewController id="nOf-Ck-ody" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuizDetailController" id="nOf-Ck-ody" customClass="QuizDetailController" customModule="Quizz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wfK-Xi-CfZ">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -174,7 +173,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your email address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E3r-KI-KN4">
                                                 <rect key="frame" x="0.0" y="0.0" width="339" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oM3-3z-MAZ">
                                                 <rect key="frame" x="0.0" y="48" width="339" height="2"/>
@@ -285,7 +284,7 @@
                                     <constraint firstAttribute="height" constant="46" id="s0h-XO-XMV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="Submit">
+                                <state key="normal" title="Start Quiz">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -294,7 +293,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="actionSubmit:" destination="nOf-Ck-ody" eventType="touchUpInside" id="572-23-pkc"/>
+                                    <action selector="actionSubmit:" destination="nOf-Ck-ody" eventType="touchUpInside" id="bNF-A0-isY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -317,17 +316,20 @@
                     </view>
                     <navigationItem key="navigationItem" id="FuO-u2-yNT"/>
                     <connections>
-                        <outlet property="textfieldQuizID" destination="E3r-KI-KN4" id="Pcn-FU-Phh"/>
+                        <outlet property="labelQuizDueDate" destination="vJL-dh-XnO" id="zMB-JB-Yaa"/>
+                        <outlet property="labelQuizDuration" destination="LJ5-Hr-oiz" id="e8z-4e-N0a"/>
+                        <outlet property="labelQuizTitle" destination="Dtp-cc-eaE" id="X2d-Sr-HkT"/>
+                        <outlet property="textfieldEmailAddress" destination="E3r-KI-KN4" id="PO5-io-sdp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mbx-hd-NLJ" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="640.65420560747657" y="62.850971922246224"/>
         </scene>
-        <!--View Controller-->
+        <!--Main Quiz Controller-->
         <scene sceneID="4ic-os-A3n">
             <objects>
-                <viewController id="G1x-99-y1T" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainQuizController" id="G1x-99-y1T" customClass="MainQuizController" customModule="Quizz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AyY-6i-dQH">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -372,15 +374,47 @@
                                         <constraint firstItem="shQ-zm-7xx" firstAttribute="centerY" secondItem="WJQ-de-2Fj" secondAttribute="centerY" id="rfi-D8-EG9"/>
                                     </constraints>
                                 </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="RKS-xV-ZP2">
+                                    <rect key="frame" x="0.0" y="456.00000034679067" width="428" height="106"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CbG-N5-KC8">
+                                            <rect key="frame" x="49" y="30" width="330" height="46"/>
+                                            <color key="backgroundColor" red="0.64642363790000001" green="0.1345376968" blue="0.1206364855" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="46" id="nzt-ha-hdS"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <state key="normal" title="Next">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="actionNextBtn:" destination="G1x-99-y1T" eventType="touchUpInside" id="BcD-ZN-0jO"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="CbG-N5-KC8" firstAttribute="top" secondItem="RKS-xV-ZP2" secondAttribute="top" constant="30" id="1Qy-ks-Z9h"/>
+                                        <constraint firstItem="CbG-N5-KC8" firstAttribute="leading" secondItem="RKS-xV-ZP2" secondAttribute="leading" constant="49" id="CeL-Sd-XAx"/>
+                                        <constraint firstAttribute="bottom" secondItem="CbG-N5-KC8" secondAttribute="bottom" constant="30" id="EBk-yc-1q3"/>
+                                        <constraint firstAttribute="trailing" secondItem="CbG-N5-KC8" secondAttribute="trailing" constant="49" id="nKi-j7-85H"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="lJw-qa-SCm">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuestionCell" id="lJw-qa-SCm" customClass="QuestionCell" customModule="Quizz" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="84.333333969116211" width="428" height="42.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lJw-qa-SCm" id="YKB-1H-32m">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="42.333332061767578"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Lt-pw-BNd">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Lt-pw-BNd">
                                                     <rect key="frame" x="20" y="10.999999999999998" width="388" height="20.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -394,8 +428,11 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="6Lt-pw-BNd" secondAttribute="bottom" id="yfq-zX-qeJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="labelQuestion" destination="6Lt-pw-BNd" id="G3Y-QH-kJh"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="163" id="d2b-mg-NBK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="answerTextfieldCell" rowHeight="163" id="d2b-mg-NBK" customClass="answerTextfieldCell" customModule="Quizz" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="126.66666603088379" width="428" height="163"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d2b-mg-NBK" id="1tu-7C-Cis">
@@ -405,7 +442,9 @@
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="onk-wJ-HTL">
                                                     <rect key="frame" x="8" y="8" width="412" height="147"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="147" id="myH-D0-6X0"/>
+                                                    </constraints>
                                                     <color key="textColor" systemColor="labelColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -430,7 +469,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="71" id="anF-XF-aow">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="answerCheckBoxCell" rowHeight="71" id="anF-XF-aow" customClass="answerCheckBoxCell" customModule="Quizz" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="289.66666603088379" width="428" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="anF-XF-aow" id="eiV-xa-Ibj">
@@ -453,8 +492,11 @@
                                                 <constraint firstItem="Kxe-Qg-fWC" firstAttribute="top" secondItem="eiV-xa-Ibj" secondAttribute="topMargin" constant="8" id="zcm-y0-xZg"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="btnCheckbtn" destination="Kxe-Qg-fWC" id="8Ry-in-AC3"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="71" id="mxS-mF-CDk">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="answerRadioBtnCell" rowHeight="71" id="mxS-mF-CDk" customClass="answerRadioBtnCell" customModule="Quizz" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="360.66666603088379" width="428" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mxS-mF-CDk" id="WVQ-U1-yhA">
@@ -464,7 +506,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jjx-dV-zzA">
                                                     <rect key="frame" x="28" y="19" width="372" height="33"/>
                                                     <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="Answer Text" image="radioButton">
+                                                    <state key="normal" title="Answer Text" image="radiobutton">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <state key="selected" image="unmarkRadioButton"/>
@@ -479,6 +521,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="G1x-99-y1T" id="0SD-pT-LY3"/>
+                                    <outlet property="delegate" destination="G1x-99-y1T" id="uiL-g3-NSW"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="f8x-oD-GzV"/>
@@ -489,6 +535,10 @@
                             <constraint firstItem="Isa-ca-QaF" firstAttribute="width" secondItem="Isa-ca-QaF" secondAttribute="height" multiplier="1:1" id="zN5-Vc-jrK"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="labelTime" destination="jNw-AG-j9j" id="i1C-eP-U26"/>
+                        <outlet property="tableview" destination="tHP-ty-WUd" id="e1O-qq-fhJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OiX-Iv-4aD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -498,7 +548,7 @@
     <resources>
         <image name="checkbox" width="16" height="16"/>
         <image name="logo" width="200" height="200"/>
-        <image name="radioButton" width="16" height="16"/>
+        <image name="radiobutton" width="16" height="16"/>
         <image name="uncheckbox" width="16" height="16"/>
         <image name="unmarkRadioButton" width="16" height="16"/>
         <systemColor name="labelColor">

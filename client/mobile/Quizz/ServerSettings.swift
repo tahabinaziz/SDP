@@ -10,10 +10,10 @@ import Foundation
 struct ServerSettings {
     
     // LIVE SEVER
-    //https://api.shifaam.com
+    
     
     // STAGGING SERVER
-    //https://devapi.shifaam.com
+    // http://localhost:5000/
     
-    static let BASE_URL = "https://api.shifaam.com"
+    static let BASE_URL = "http://localhost:5000/"
 }
