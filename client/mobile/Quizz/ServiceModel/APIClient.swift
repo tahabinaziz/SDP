@@ -23,7 +23,9 @@ enum Route: String {
     case specialization = ""
     
     case quizDetail = "api/quiz/quizDetail"
-    case getQuestions = "/api/question/?"
+    case getQuestions = "api/question/?"
+    case answerSubmit = "api/answer/?"
+    
     case cities = "/v1/list/city"
     case verifyNumber = "/v1/verify-number"
     case services = "/v1/list/services"

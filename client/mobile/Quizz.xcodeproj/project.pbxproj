@@ -197,13 +197,6 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
-		FA1E50B62666355600557AEF /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		FA1E50B72666356400557AEF /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,7 +249,6 @@
 				FA1E50AC266634FD00557AEF /* Models */,
 				FA1E50AD2666351A00557AEF /* ServiceModel */,
 				FA1E50B52666353A00557AEF /* Storyboard */,
-				FA1E50B62666355600557AEF /* ViewModel */,
 				FA1E50B72666356400557AEF /* ViewController */,
 				FAC8E5BB26652028004EA56F /* Assets.xcassets */,
 				FAC8E5BD26652028004EA56F /* LaunchScreen.storyboard */,

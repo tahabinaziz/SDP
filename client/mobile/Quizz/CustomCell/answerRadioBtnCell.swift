@@ -9,6 +9,8 @@ import UIKit
 
 class answerRadioBtnCell: UITableViewCell {
 
+    @IBOutlet weak var btnTitle: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

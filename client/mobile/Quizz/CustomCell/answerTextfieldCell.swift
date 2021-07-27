@@ -9,6 +9,8 @@ import UIKit
 
 class answerTextfieldCell: UITableViewCell {
 
+    @IBOutlet weak var textfieldAnswer: UITextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

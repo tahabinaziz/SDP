@@ -38,9 +38,12 @@ class QuizDetailController: UIViewController {
         } else if !(Validation.isValidEmail(self.textfieldEmailAddress.text)) {
             Utility.main.showToast(message: "Please enter valid email address")
             return false
-        } else if !(self.textfieldEmailAddress.text ?? "").contains(self.quiz?.emailRegex ?? "") {
-            Utility.main.showToast(message: "Provided email address is not allowed to take this quiz. Please retry. If you think your email address is correct, please contact your instructor.")
-            return false
+        } else if (!(self.quiz?.emailRegex?.isEmpty ?? true)) {
+            if !(self.textfieldEmailAddress.text ?? "").contains(self.quiz?.emailRegex ?? "") {
+                Utility.main.showToast(message: "Provided email address is not allowed to take this quiz. Please retry. If you think your email address is correct, please contact your instructor.")
+                return false
+            }
+            
         }
         
         return true
@@ -50,7 +53,6 @@ class QuizDetailController: UIViewController {
         Utility.main.showAlert(message: "Once you start your quiz, you will not be able to re-attempt it. You will not be able to view the previous question. \n\n Are you sure want to start the quiz?", title: "Warning", controller: self, firstButtonText: "YES", secondButtonText: "NO") { yesBtn, noBtn in
             if yesBtn != nil {
                 // start quiz
-                self.navigateToMainQuizScreen(with: nil)
                 self.getQuestions()
             }
         }
@@ -59,7 +61,8 @@ class QuizDetailController: UIViewController {
     func navigateToMainQuizScreen(with questions: Questions?) {
         if let controller = AppStoryboard.Main.instance.instantiateViewController(identifier: "MainQuizController") as? MainQuizController {
             controller.quiz = self.quiz
-//            controller.questions = questions
+            controller.questions = questions
+            controller.userEmail = self.textfieldEmailAddress.text
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }
@@ -82,8 +85,9 @@ class QuizDetailController: UIViewController {
         APIClient.callAPI(request: .getQuestions(param: param)) { response in
             do {
                 let json = try JSON(data: response as! Data)
-                let questionsData = try JSONDecoder().decode(Questions.self, from: json["questions"].rawData())
-                self.navigateToMainQuizScreen(with: questionsData)
+                let questionsData = try JSONDecoder().decode([Questions].self, from: json["questions"].rawData())
+                print(questionsData)
+                self.navigateToMainQuizScreen(with: questionsData.first)
             } catch let error {
                 Utility.main.showToast(message: error.localizedDescription)
             }

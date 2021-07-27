@@ -1,4 +1,4 @@
-/* 
+/*
 Copyright (c) 2021 Swift Models Generated from JSON powered by http://www.json4swift.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -13,22 +13,22 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 import Foundation
 struct Questions : Codable {
-	let _id : String?
-	let meetingId : String?
-	let questionData : [QuestionData]?
+    let id : String?
+    let meetingId : String?
+    let questionData : [QuestionData]?
 
-	enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
 
-		case _id = "_id"
-		case meetingId = "meetingId"
-		case questionData = "questionData"
-	}
+        case id = "_id"
+        case meetingId = "meetingId"
+        case questionData = "questionData"
+    }
 
-	init(from decoder: Decoder) throws {
-		let values = try decoder.container(keyedBy: CodingKeys.self)
-		_id = try values.decodeIfPresent(String.self, forKey: ._id)
-		meetingId = try values.decodeIfPresent(String.self, forKey: .meetingId)
-		questionData = try values.decodeIfPresent([QuestionData].self, forKey: .questionData)
-	}
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decodeIfPresent(String.self, forKey: .id)
+        meetingId = try values.decodeIfPresent(String.self, forKey: .meetingId)
+        questionData = try values.decodeIfPresent([QuestionData].self, forKey: .questionData)
+    }
 
 }
